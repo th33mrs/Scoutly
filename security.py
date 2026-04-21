@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Security Module
+Scoutly - Security Module
 ====================================
 Handles secrets management, input sanitization, and secure defaults.
 

@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Job Tracker
+Scoutly - Job Tracker
 """
 
 import json

@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Matching Engine
+Scoutly - Matching Engine
 ===================================
 Computes semantic similarity between resume and job descriptions
 using sentence-transformers + cosine similarity.

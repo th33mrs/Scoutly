@@ -1,4 +1,4 @@
-# Contributing to JobScannerAI
+# Contributing to Scoutly
 
 ## Adding a New Job Source
 

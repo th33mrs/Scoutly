@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Streamlit Dashboard
+Scoutly Bot - Streamlit Dashboard
 Run with: streamlit run app.py
 """
 
@@ -17,7 +17,7 @@ from tailor import tailor_resume, _extract_keywords, _clean_text
 import config
 
 st.set_page_config(
-    page_title="Job Scanner",
+    page_title="Scoutly",
     page_icon="mag",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -114,7 +114,7 @@ def get_status_emoji(status):
 
 # ─── Sidebar ────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚡ Job Scanner")
+    st.markdown("## ⚡ Scoutly")
     st.markdown("---")
     stats = tracker.get_stats()
     if stats["total"] > 0:
@@ -135,13 +135,13 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(
         "<div style='text-align:center;color:#676e95;font-size:0.75rem;'>"
-        "Scanner v1.0 · {} sources active"
+        "Scoutly v1.0 · {} sources active"
         "</div>".format(sum(1 for v in config.ENABLED_SOURCES.values() if v)),
         unsafe_allow_html=True,
     )
 
 # ─── Main ───────────────────────────────────────────────────────────
-st.markdown("# 🎯 Job Scanner Dashboard")
+st.markdown("# 🎯 Scoutly Dashboard")
 tab1, tab2, tab3, tab4 = st.tabs(["📋 Jobs", "📊 Analytics", "✂️ Resume Tailor", "⚙️ Settings"])
 
 # ─── Tab 1: Jobs ────────────────────────────────────────────────────

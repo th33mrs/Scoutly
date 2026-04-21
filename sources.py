@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Source Plugins
+Scoutly - Source Plugins
 =================================
 Each source returns a list of JobPosting dataclass instances.
 """

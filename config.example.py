@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Configuration
+Scoutly - Configuration
 ================================
 Edit these settings before first run.
 """

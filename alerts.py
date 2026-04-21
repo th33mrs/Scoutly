@@ -1,5 +1,5 @@
 """
-Job Scanner Bot - Alert System
+Scoutly - Alert System
 ================================
 Sends matched job notifications via Discord and/or Telegram.
 """
@@ -58,7 +58,7 @@ def send_discord_alert(job: JobPosting, score: float) -> bool:
         embed["fields"].append({"name": "Posted", "value": job.posted_date[:10], "inline": True})
 
     payload = {
-        "username": "Job Scanner Bot",
+        "username": "Scoutly",
         "embeds": [embed],
     }
 
