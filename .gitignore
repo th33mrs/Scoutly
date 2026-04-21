@@ -1,0 +1,27 @@
+# Secrets — NEVER commit
+.env
+.env.*
+
+# Data files — contain personal info
+seen_jobs.json
+tracked_jobs.json
+saved_jds.json
+job_matches.csv
+tailored_*.txt
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
