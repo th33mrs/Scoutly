@@ -99,7 +99,7 @@ with tab2:
         if st.button("Run scan now", type="primary"):
             with st.spinner("Scanning job sources... this takes about 60 seconds."):
                 try:
-                    import config
+                    import config_cloud as config
                     config.RESUME_TEXT = user_data.get("resume", "")
                     config.SEARCH_QUERIES = user_data.get("queries", [])
                     config.SIMILARITY_THRESHOLD = user_data.get("threshold", 0.55)
@@ -146,7 +146,7 @@ with tab3:
             if jd_input and len(jd_input) > 30:
                 with st.spinner("Analyzing..."):
                     try:
-                        import config
+                        import config_cloud as config
                         config.RESUME_TEXT = user_data.get("resume", "")
 
                         from tailor import tailor_resume
