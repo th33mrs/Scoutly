@@ -1,5 +1,5 @@
 """
-Scoutly - Configuration
+Trovly - Configuration
 ================================
 Edit these settings before first run.
 """

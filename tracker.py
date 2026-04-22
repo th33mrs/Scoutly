@@ -1,5 +1,5 @@
 """
-Scoutly - Job Tracker
+Trovly - Job Tracker
 """
 
 import json

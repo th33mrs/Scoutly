@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Scoutly - Main Runner
+Trovly - Main Runner
 ================================
 Scans job sources, matches against resume, sends alerts.
 Run with: python main.py
@@ -261,7 +261,7 @@ def run_stats():
 
 # ─── Entry Point ────────────────────────────────────────────────────
 def main():
-    parser = argparse.ArgumentParser(description="Scoutly")
+    parser = argparse.ArgumentParser(description="Trovly")
     parser.add_argument("--once", action="store_true", help="Run a single scan and exit")
     parser.add_argument("--stats", action="store_true", help="Show score distribution diagnostic")
     parser.add_argument("--reset", action="store_true", help="Clear seen-jobs database")
@@ -292,7 +292,7 @@ def main():
         logger.error("⚠️  Resume not configured — paste your resume text into config.py RESUME_TEXT")
         return
 
-    logger.info(f"Scoutly starting")
+    logger.info(f"Trovly starting")
     logger.info(f"  Threshold:  {config.SIMILARITY_THRESHOLD:.0%}")
     logger.info(f"  Interval:   {config.SCAN_INTERVAL_MINUTES} min")
     logger.info(f"  Sources:    {[k for k,v in config.ENABLED_SOURCES.items() if v]}")

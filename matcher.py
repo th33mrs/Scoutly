@@ -1,5 +1,5 @@
 """
-Scoutly - Matching Engine
+Trovly - Matching Engine
 ===================================
 Computes semantic similarity between resume and job descriptions
 using sentence-transformers + cosine similarity.

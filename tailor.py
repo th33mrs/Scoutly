@@ -1,5 +1,5 @@
 """
-Scoutly - Resume Tailor
+Trovly - Resume Tailor
 Usage:
   python tailor.py --jd "paste job description here"
   python tailor.py --export --jd "paste JD"

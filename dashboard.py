@@ -1,5 +1,5 @@
 """
-Scoutly - Dashboard & Export
+Trovly - Dashboard & Export
 Usage:
   python dashboard.py                 → Show dashboard
   python dashboard.py --export        → Export to CSV
@@ -123,7 +123,7 @@ def send_weekly_summary(tracker):
             {"name": "Pipeline", "value": status_line or "n/a", "inline": False},
         ],
     }
-    payload = {"username": "Scoutly", "embeds": [embed]}
+    payload = {"username": "Trovly", "embeds": [embed]}
     try:
         resp = requests.post(config.DISCORD_WEBHOOK_URL, json=payload, timeout=10)
         if resp.status_code == 204:

@@ -1,5 +1,5 @@
 """
-Scoutly - Source Plugins
+Trovly - Source Plugins
 =================================
 Each source returns a list of JobPosting dataclass instances.
 """

@@ -1,5 +1,5 @@
 """
-Scoutly - Role Suggester
+Trovly - Role Suggester
 ===========================
 Analyzes your resume and suggests job roles you'd be a strong fit for.
 
@@ -20,7 +20,7 @@ from sentence_transformers import SentenceTransformer
 
 import config
 
-logger = logging.getLogger("scoutly.roles")
+logger = logging.getLogger("trovly.roles")
 
 MODEL_NAME = "all-MiniLM-L6-v2"
 _model = None
@@ -223,7 +223,7 @@ def print_suggestions(results):
         return
 
     print("\n" + "=" * 65)
-    print("  SCOUTLY ROLE SUGGESTIONS")
+    print("  TROVLY ROLE SUGGESTIONS")
     print("=" * 65)
 
     strong = [r for r in results if r["fit"] == "strong"]
@@ -267,7 +267,7 @@ def print_suggestions(results):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Scoutly Role Suggester")
+    parser = argparse.ArgumentParser(description="Trovly Role Suggester")
     parser.add_argument("--top", type=int, default=15)
     parser.add_argument("--stretch", action="store_true")
     parser.add_argument("--add-queries", action="store_true")

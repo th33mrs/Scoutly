@@ -1,5 +1,5 @@
 """
-Scoutly - Security Module
+Trovly - Security Module
 ====================================
 Handles secrets management, input sanitization, and secure defaults.
 

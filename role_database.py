@@ -1,5 +1,5 @@
 """
-Scoutly - Expanded Role Database
+Trovly - Expanded Role Database
 93 roles across 19 industries.
 """
 

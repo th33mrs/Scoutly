@@ -1,4 +1,4 @@
-# Contributing to Scoutly
+# Contributing to Trovly
 
 ## Adding a New Job Source
 
