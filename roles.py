@@ -33,7 +33,9 @@ def _get_model():
     return _model
 
 
-ROLE_DATABASE = [
+from role_database import EXPANDED_ROLES
+ROLE_DATABASE = EXPANDED_ROLES
+ROLE_DATABASE_OLD = [
     {"title": "DevOps Engineer", "category": "DevOps / Infrastructure",
      "description": "Design and maintain CI/CD pipelines, automate infrastructure provisioning with Terraform and Ansible, manage containerized deployments with Docker and Kubernetes, monitor production systems, implement infrastructure as code practices.",
      "key_skills": ["CI/CD", "Docker", "Kubernetes", "Terraform", "AWS", "Linux", "Jenkins", "GitHub Actions"]},
