@@ -1,0 +1,121 @@
+"""
+Job Scanner Bot - Configuration
+================================
+Edit these settings before first run.
+"""
+from security import get_secret
+
+
+RESUME_TEXT = """placeholder — loaded from user profile at runtime"""
+
+BOOST_KEYWORDS = [
+    "python", "data engineer", "machine learning", "devops engineer", "AWS",
+    "cloud engineer", "terraform", "docker", "kubernetes", "CI/CD",
+    "cybersecurity", "SIEM", "splunk", "PostgreSQL", "infrastructure",
+]
+BOOST_WEIGHT = 0.05
+SIMILARITY_THRESHOLD = 0.55
+
+SEARCH_QUERIES = [
+    "python developer",
+    "data engineer",
+    "machine learning engineer",
+    "devops engineer",
+    "cloud engineer",
+    "site reliability engineer",
+    "platform engineer",
+    "security engineer",
+    "developer experience engineer",
+    "infrastructure engineer",
+    "cloud operations engineer",
+    "AWS engineer",
+    "cloud infrastructure engineer",
+    "systems engineer",
+    "devops automation engineer",
+    "build and release engineer",
+    "deployment engineer",
+    "GitOps engineer",
+    "SOC analyst",
+    "cloud security engineer",
+    "DevSecOps engineer",
+    "detection engineer",
+    "security operations engineer",
+    "production engineer",
+    "reliability engineer",
+    "internal tools engineer",
+    "backend engineer",
+    "systems administrator",
+    "cloud consultant",
+    "cloud architect",
+    "software engineer",
+]
+
+LOCATION = "Remote", "New York, NY", "Baltimore, MD",
+REMOTE_ONLY = True
+SCAN_INTERVAL_MINUTES = 1440
+
+DISCORD_WEBHOOK_URL = get_secret("DISCORD_WEBHOOK_URL")
+TELEGRAM_BOT_TOKEN = get_secret("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = get_secret("TELEGRAM_CHAT_ID")
+
+ENABLED_SOURCES = {
+    "adzuna": True,
+    "remotive": True,
+    "arbeitnow": True,
+    "usajobs": False,
+    "the_muse": True,
+    "jobicy": True,
+    "himalayas": True,
+    "rss_feeds": True,
+}
+
+ADZUNA_APP_ID = get_secret("ADZUNA_APP_ID")
+ADZUNA_APP_KEY = get_secret("ADZUNA_APP_KEY")
+ADZUNA_COUNTRY = "us"
+USAJOBS_API_KEY = get_secret("USAJOBS_API_KEY")
+USAJOBS_EMAIL = get_secret("USAJOBS_EMAIL")
+
+RSS_FEEDS = [
+    "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss",
+    "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss",
+    "https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss",
+    "https://weworkremotely.com/categories/remote-programming-jobs.rss",
+]
+
+SEEN_JOBS_DB = "seen_jobs.json"
+MAX_POST_AGE_DAYS = 30
+LOG_FILE = "job_scanner.log"
+
+# ─── Section Weights ────────────────────────────────────────────────
+# Multiplier applied to resume bullets during matching.
+# Higher weight = that section's experience counts more toward match scores.
+# "Cloud Engineer Consultant" at 1.3 means those bullets are 30% more influential.
+SECTION_WEIGHTS = {
+    "Cloud Engineer Consultant": 1.3,
+    "Software Engineer": 1.2,
+    "Web Developer": 1.0,
+    "Software Engineer Intern": 0.7,
+    "Skills": 1.1,
+    "Certifications": 0.8,
+}
+DEFAULT_SECTION_WEIGHT = 1.0
+
+# ─── Negative Keywords ─────────────────────────────────────────────
+# Jobs containing ANY of these (case-insensitive) get auto-skipped
+# before matching. Saves processing time and keeps alerts clean.
+NEGATIVE_KEYWORDS = [
+    "clearance required",
+    "ts/sci",
+    "on-site only",
+    "no remote",
+    "director",
+    "intern",
+    "unpaid",
+    "volunteer",
+]
+
+# ─── Salary Floor ──────────────────────────────────────────────────
+# Minimum annual salary. Jobs posting below this get skipped.
+# Jobs with NO salary info still pass through (no penalty for missing data).
+# Set to 0 or None to disable.
+SALARY_FLOOR = 100000
