@@ -6,3 +6,7 @@ feedparser
 schedule
 python-dateutil
 pandas
+bcrypt
+
+pypdf
+python-docx
