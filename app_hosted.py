@@ -6,6 +6,11 @@ Run with: streamlit run app_hosted.py
 import streamlit as st
 from auth import login_page, logout, get_user_data, save_user_data
 from resume_parser import parse_resume_file
+from applications import (
+    list_applications, get_application, add_application,
+    update_application, delete_application, get_follow_ups,
+    get_stats, STATUS_OPTIONS,
+)
 from usage_limits import (
     get_user_tier, can_scan, can_tailor,
     increment_scans, increment_tailors, get_usage_summary,
@@ -234,7 +239,7 @@ with st.sidebar:
         logout()
     st.markdown("---")
 
-tab1, tab2, tab3 = st.tabs(["Setup", "Scan", "Tailor"])
+tab1, tab2, tab3, tab4 = st.tabs(["Setup", "Scan", "Tailor", "Applications"])
 
 with tab1:
     st.markdown("### Your Profile")
@@ -391,3 +396,154 @@ with tab3:
 
                     except Exception as e:
                         st.error("Analysis failed: {}".format(e))
+
+# ─── APPLICATIONS TAB ───────────────────────────────────────────────
+with tab4:
+    st.markdown("### Application Tracker")
+
+    stats = get_stats(username)
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Total applications", stats["total"])
+    with col2:
+        st.metric("Active", stats["active"])
+    with col3:
+        st.metric("Interview rate", "{}%".format(stats["interview_rate"]))
+    with col4:
+        st.metric("Offer rate", "{}%".format(stats["offer_rate"]))
+
+    st.markdown("---")
+
+    # Follow-up reminders
+    follow_ups = get_follow_ups(username, days_threshold=7)
+    if follow_ups:
+        with st.expander("Follow-ups needed ({})".format(len(follow_ups)), expanded=True):
+            for app in follow_ups[:10]:
+                st.markdown("**{}** at {} - {} days since last update".format(
+                    app["title"], app["company"], app["days_since_update"]
+                ))
+
+    st.markdown("---")
+
+    # Add new application
+    with st.expander("Add new application", expanded=False):
+        col_t, col_c = st.columns(2)
+        with col_t:
+            new_title = st.text_input("Job title", key="new_app_title", max_chars=200)
+            new_url = st.text_input("URL", key="new_app_url", max_chars=500)
+            new_location = st.text_input("Location", key="new_app_location", max_chars=100)
+        with col_c:
+            new_company = st.text_input("Company", key="new_app_company", max_chars=100)
+            new_salary = st.text_input("Salary", key="new_app_salary", max_chars=100)
+            new_notes_short = st.text_input("Initial notes", key="new_app_notes", max_chars=500)
+
+        if st.button("Add to tracker", type="primary"):
+            success, msg, _ = add_application(
+                username, new_title, new_company,
+                url=new_url, location=new_location,
+                salary=new_salary, notes=new_notes_short,
+            )
+            if success:
+                st.success(msg)
+                st.rerun()
+            else:
+                st.error(msg)
+
+    st.markdown("---")
+
+    # Filter controls
+    col_f1, col_f2 = st.columns(2)
+    with col_f1:
+        filter_status = st.multiselect(
+            "Filter by status",
+            options=STATUS_OPTIONS,
+            default=[],
+            key="app_filter_status",
+        )
+    with col_f2:
+        sort_options = {
+            "date_applied": "Date applied (newest first)",
+            "last_updated": "Last updated",
+            "company": "Company A-Z",
+            "status": "Status",
+        }
+        sort_choice = st.selectbox(
+            "Sort by",
+            options=list(sort_options.keys()),
+            format_func=lambda x: sort_options[x],
+            key="app_sort",
+        )
+
+    # List applications
+    apps = list_applications(
+        username,
+        status_filter=filter_status if filter_status else None,
+        sort_by=sort_choice,
+        reverse=(sort_choice in ["date_applied", "last_updated"]),
+    )
+
+    if not apps:
+        st.info("No applications tracked yet. Add one above or track from scan results.")
+    else:
+        st.markdown("**{} applications**".format(len(apps)))
+
+        for app in apps:
+            with st.expander("{} at {} - {}".format(app["title"], app["company"], app["status"])):
+                col_l, col_r = st.columns([3, 1])
+
+                with col_l:
+                    if app.get("url"):
+                        st.markdown("[Open posting]({})".format(app["url"]))
+                    if app.get("location"):
+                        st.markdown("**Location:** {}".format(app["location"]))
+                    if app.get("salary"):
+                        st.markdown("**Salary:** {}".format(app["salary"]))
+                    st.caption("Applied: {}".format(app.get("date_applied", "")[:10]))
+                    st.caption("Last updated: {}".format(app.get("last_updated", "")[:10]))
+
+                with col_r:
+                    new_status = st.selectbox(
+                        "Status",
+                        options=STATUS_OPTIONS,
+                        index=STATUS_OPTIONS.index(app["status"]) if app["status"] in STATUS_OPTIONS else 0,
+                        key="status_{}".format(app["id"]),
+                    )
+                    if new_status != app["status"]:
+                        update_application(username, app["id"], {"status": new_status})
+                        st.rerun()
+
+                # Notes
+                current_notes = app.get("notes", "")
+                new_notes = st.text_area(
+                    "Notes",
+                    value=current_notes,
+                    height=100,
+                    key="notes_{}".format(app["id"]),
+                    placeholder="Recruiter name, salary discussions, interview feedback, etc.",
+                )
+
+                col_save, col_del = st.columns([1, 1])
+                with col_save:
+                    if new_notes != current_notes:
+                        if st.button("Save notes", key="save_notes_{}".format(app["id"])):
+                            update_application(username, app["id"], {"notes": new_notes})
+                            st.success("Notes saved")
+                            st.rerun()
+                with col_del:
+                    confirm_key = "confirm_del_{}".format(app["id"])
+                    if st.button("Delete", key="del_{}".format(app["id"]), type="secondary"):
+                        if st.session_state.get(confirm_key):
+                            delete_application(username, app["id"])
+                            st.session_state[confirm_key] = False
+                            st.rerun()
+                        else:
+                            st.session_state[confirm_key] = True
+                            st.warning("Click Delete again to confirm")
+
+                # Status history
+                history = app.get("status_history", [])
+                if len(history) > 1:
+                    st.markdown("**Status history:**")
+                    for h in history:
+                        st.caption("{}: {}".format(h.get("date", "")[:10], h.get("status", "")))
