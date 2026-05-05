@@ -27,19 +27,20 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
-/* Brand variables */
 :root {
-    --gold-300: #fde047;
-    --gold-500: #fbbf24;
-    --amber-500: #f59e0b;
-    --coral-500: #f97316;
-    --pink-500: #ec4899;
-    --night-900: #0d1117;
-    --night-800: #161b22;
-    --night-600: #2d2d44;
-    --paper: #f8fafc;
-    --paper-muted: #cbd5e1;
-    --grad-sunset: linear-gradient(135deg, #fde047 0%, #fbbf24 30%, #f97316 65%, #ec4899 100%);
+    --cream: #fef9f0;
+    --cream-warm: #fdf3e2;
+    --cream-deep: #faead0;
+    --white: #ffffff;
+    --ink: #1f1612;
+    --ink-soft: #3d2f26;
+    --muted: #78645a;
+    --gold: #f59e0b;
+    --gold-light: #fbbf24;
+    --coral: #ea580c;
+    --pink: #db2777;
+    --grad-sunrise: linear-gradient(135deg, #fbbf24 0%, #f59e0b 30%, #ea580c 65%, #db2777 100%);
+    --grad-soft: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fbcfe8 100%);
 }
 
 html, body, [class*="css"] { font-family: 'Outfit', sans-serif !important; }
@@ -49,159 +50,163 @@ html, body, [class*="css"] { font-family: 'Outfit', sans-serif !important; }
     max-width: 1200px;
 }
 
-/* Headings */
 h1, h2, h3 {
     font-weight: 700 !important;
     letter-spacing: -0.02em !important;
-    color: var(--paper) !important;
+    color: #1f1612 !important;
 }
 
-/* Gradient text for the brand name in main heading */
 h1 {
-    background: linear-gradient(135deg, #fde047 0%, #fbbf24 30%, #f97316 65%, #ec4899 100%);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 30%, #ea580c 65%, #db2777 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
 }
 
-/* Primary buttons - golden gradient with dark text */
+/* Primary buttons - sunrise gradient */
 .stButton > button[kind="primary"],
 .stButton > button[data-testid="baseButton-primary"] {
-    background: linear-gradient(135deg, #fde047 0%, #fbbf24 30%, #f97316 65%, #ec4899 100%) !important;
-    color: #0d1117 !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 30%, #ea580c 65%, #db2777 100%) !important;
+    color: white !important;
     font-weight: 600 !important;
     border: none !important;
-    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.25) !important;
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3) !important;
     transition: transform 0.15s, box-shadow 0.2s !important;
 }
 
 .stButton > button[kind="primary"]:hover,
 .stButton > button[data-testid="baseButton-primary"]:hover {
     transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4) !important;
+    box-shadow: 0 8px 24px rgba(234, 88, 12, 0.45) !important;
 }
 
-/* Secondary buttons - outlined */
+/* Secondary buttons */
 .stButton > button:not([kind="primary"]):not([data-testid="baseButton-primary"]) {
-    background: transparent !important;
-    color: #f8fafc !important;
-    border: 1.5px solid #cbd5e1 !important;
+    background: white !important;
+    color: #1f1612 !important;
+    border: 1.5px solid #faead0 !important;
     font-weight: 500 !important;
 }
 
 .stButton > button:not([kind="primary"]):not([data-testid="baseButton-primary"]):hover {
-    border-color: #fbbf24 !important;
-    color: #fbbf24 !important;
+    border-color: #ea580c !important;
+    color: #ea580c !important;
 }
 
-/* Metric cards with golden accent border */
+/* Metric cards with coral accent */
 div[data-testid="stMetric"] {
-    background: #161b22;
-    border: 1px solid #2d2d44;
-    border-left: 3px solid #fbbf24;
+    background: white;
+    border: 1px solid #faead0;
+    border-left: 3px solid #ea580c;
     border-radius: 12px;
     padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.06);
 }
 
 div[data-testid="stMetric"] label {
-    color: #cbd5e1 !important;
+    color: #78645a !important;
     font-size: 0.85rem !important;
     font-weight: 500 !important;
 }
 
 div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
-    color: #f8fafc !important;
+    color: #1f1612 !important;
     font-weight: 700 !important;
 }
 
-/* Tabs - active tab has golden underline */
+/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px;
-    border-bottom: 1px solid #2d2d44;
+    border-bottom: 1px solid #faead0;
 }
 
 .stTabs [data-baseweb="tab"] {
-    color: #cbd5e1 !important;
+    color: #78645a !important;
     font-weight: 500 !important;
 }
 
 .stTabs [aria-selected="true"] {
-    color: #fbbf24 !important;
+    color: #ea580c !important;
 }
 
 .stTabs [data-baseweb="tab-highlight"] {
-    background: linear-gradient(90deg, #fbbf24, #ec4899) !important;
+    background: linear-gradient(90deg, #f59e0b, #db2777) !important;
     height: 3px !important;
 }
 
-/* Sidebar styling */
+/* Sidebar */
 section[data-testid="stSidebar"] {
-    background: #161b22 !important;
-    border-right: 1px solid #2d2d44;
+    background: #fdf3e2 !important;
+    border-right: 1px solid #faead0;
 }
 
 section[data-testid="stSidebar"] .stMarkdown h2 {
-    background: linear-gradient(135deg, #fbbf24 0%, #ec4899 100%);
+    background: linear-gradient(135deg, #f59e0b 0%, #db2777 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 28px !important;
 }
 
-/* Info/warning/error boxes */
+/* Alerts */
 div[data-testid="stAlert"] {
     border-radius: 10px;
     border-width: 1px;
 }
 
-/* Sliders - gold thumb */
+/* Sliders */
 .stSlider [role="slider"] {
-    background: #fbbf24 !important;
-    border-color: #fbbf24 !important;
+    background: #ea580c !important;
+    border-color: #ea580c !important;
 }
 
-/* Text inputs and text areas */
+/* Inputs and textareas */
 .stTextInput input, .stTextArea textarea {
-    background: #161b22 !important;
-    border: 1px solid #2d2d44 !important;
-    color: #f8fafc !important;
+    background: white !important;
+    border: 1px solid #faead0 !important;
+    color: #1f1612 !important;
     border-radius: 8px !important;
 }
 
 .stTextInput input:focus, .stTextArea textarea:focus {
-    border-color: #fbbf24 !important;
-    box-shadow: 0 0 0 1px #fbbf24 !important;
+    border-color: #ea580c !important;
+    box-shadow: 0 0 0 1px #ea580c !important;
 }
 
-/* Expander headers */
+/* Expander */
 .streamlit-expanderHeader {
-    background: #161b22 !important;
-    border: 1px solid #2d2d44 !important;
+    background: white !important;
+    border: 1px solid #faead0 !important;
     border-radius: 10px !important;
-    border-left: 3px solid #fbbf24 !important;
+    border-left: 3px solid #ea580c !important;
 }
 
-/* Login screen logo mark */
-.trovly-mark {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 16px;
-    background: linear-gradient(135deg, #fde047 0%, #fbbf24 30%, #f97316 65%, #ec4899 100%);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #0d1117;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-    font-size: 36px;
-    box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+/* File uploader */
+[data-testid="stFileUploadDropzone"] {
+    background: white !important;
+    border: 2px dashed #faead0 !important;
+    border-radius: 12px !important;
 }
 
-/* Apply links */
-a[data-testid="stLink"] {
-    color: #fbbf24 !important;
+[data-testid="stFileUploadDropzone"]:hover {
+    border-color: #ea580c !important;
+    background: #fdf3e2 !important;
+}
+
+/* Selectbox */
+.stSelectbox [data-baseweb="select"] {
+    background: white !important;
+    border-color: #faead0 !important;
+}
+
+/* Links */
+a {
+    color: #ea580c !important;
+}
+
+a:hover {
+    color: #db2777 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -302,7 +307,7 @@ with tab2:
             increment_scans(username)
             with st.spinner("Scanning job sources... this takes about 60 seconds."):
                 try:
-                    import config_cloud as config
+                    import config
                     config.RESUME_TEXT = user_data.get("resume", "")
                     config.SEARCH_QUERIES = user_data.get("queries", [])
                     config.SIMILARITY_THRESHOLD = user_data.get("threshold", 0.55)
@@ -354,7 +359,7 @@ with tab3:
                 increment_tailors(username)
                 with st.spinner("Analyzing..."):
                     try:
-                        import config_cloud as config
+                        import config
                         config.RESUME_TEXT = user_data.get("resume", "")
 
                         from tailor import tailor_resume
