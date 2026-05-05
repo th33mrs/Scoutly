@@ -5,6 +5,7 @@ Run with: streamlit run app_hosted.py
 
 import streamlit as st
 from auth import login_page, logout, get_user_data, save_user_data
+from resume_parser import parse_resume_file
 from usage_limits import (
     get_user_tier, can_scan, can_tailor,
     increment_scans, increment_tailors, get_usage_summary,
