@@ -1,0 +1,43 @@
+# Don't ship secrets, caches, or local junk into the image.
+.git
+.github
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.coverage
+htmlcov
+*.log
+logs/
+
+# Secrets / local data
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+seen_jobs.json
+tracked_jobs.json
+saved_jds.json
+applications.json
+users.json
+usage.json
+job_matches.csv
+tailored_*.txt
+
+# Local-only configs
+config.py
+config.py.cloud
+
+# OS / IDE
+.DS_Store
+.idea
+.vscode
+
+# Docs / dev-only
+docker-compose*.yml
+Makefile
+CLEANUP.md
