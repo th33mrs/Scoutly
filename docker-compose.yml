@@ -1,0 +1,36 @@
+# ─── Trovly local dev environment ────────────────────────────
+# Spins up the Streamlit app with hot-reload via bind-mount.
+#   make dev      # bring it up
+#   make logs     # tail
+#   make down     # tear down
+#
+# Set TROVLY_ENV=dev to keep dev-only flags + verbose logs.
+
+services:
+  trovly:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: trovly:dev
+    container_name: trovly-dev
+    env_file:
+      - .env
+    environment:
+      TROVLY_ENV: dev
+      LOG_LEVEL: DEBUG
+      STREAMLIT_SERVER_RUN_ON_SAVE: "true"
+    ports:
+      - "8501:8501"
+    volumes:
+      # Hot-reload: changes to source files are picked up by Streamlit.
+      - ./:/app
+      # Don't let the container's empty venv shadow our deps.
+      - /app/venv
+      - /app/.venv
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health').read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
